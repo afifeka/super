@@ -18,7 +18,6 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "3.2.2-4",
     "opusscript": "0.0.3",
     "simple-youtube-api": "^3.0.0",
