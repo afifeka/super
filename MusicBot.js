@@ -19,13 +19,6 @@ client.on('disconnect', () => console.log('I just disconnected, making sure you 
 
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
-
-client.on("ready", async () => {
-
-	client.user.setActivity("/help | Alpha v0.1", {type: "Playing"});
-  
-});
-
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
 	if (!msg.content.startsWith(PREFIX)) return undefined;
@@ -66,9 +59,7 @@ client.on('message', async msg => { // eslint-disable-line
 					let index = 0;
 					msg.channel.send(`
 __**Song selection:**__
-
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-
 Please provide a value to select one of the search results ranging from 1-10.
 					`);
 					// eslint-disable-next-line max-depth
@@ -116,9 +107,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 		if (!serverQueue) return msg.channel.send('There is nothing playing.');
 		return msg.channel.send(`
 __**Song queue:**__
-
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
 	} else if (command === 'pause') {
