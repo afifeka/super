@@ -18,6 +18,8 @@
     "ffmpeg-binaries": "^3.2.2-3",
     "opusscript": "0.0.3",
     "simple-youtube-api": "^3.0.0",
+    "rebuild": "^0.1.2",
+    "node-gyp": "^3.6.2",
     "ytdl-core": "^0.16.0"
   },
   "devDependencies": {
