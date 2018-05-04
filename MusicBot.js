@@ -1,4 +1,4 @@
-const { Client, Util } = require('discord.js');
+const { Client } = require('discord.js');
 const { PREFIX } = require('./config');
 const GOOGLE_API_KEY = process.env.API_KEY
 const YouTube = require('simple-youtube-api');
@@ -14,14 +14,18 @@ client.on('warn', console.warn);
 
 client.on('error', console.error);
 
-client.on('ready', () => console.log('Yo this ready!'));
+client.on('ready', async () => {
+	console.log("Gua dah on geblek")
+	client.user.setActivity(`YouTube`, {type:"WATCHING"})
+});
 
-client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
+client.on('disconnect', async () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
 
-client.on('reconnecting', () => console.log('I am reconnecting now!'));
+client.on('reconnecting', async () => console.log('I am reconnecting now!'));
 
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
+	if (msg.channel.type === 'dm') return undefined;
 	if (!msg.content.startsWith(PREFIX)) return undefined;
 
 	const args = msg.content.split(' ');
@@ -60,7 +64,9 @@ client.on('message', async msg => { // eslint-disable-line
 					let index = 0;
 					msg.channel.send(`
 __**Song selection:**__
+
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
+
 Please provide a value to select one of the search results ranging from 1-10.
 					`);
 					// eslint-disable-next-line max-depth
@@ -108,7 +114,9 @@ Please provide a value to select one of the search results ranging from 1-10.
 		if (!serverQueue) return msg.channel.send('There is nothing playing.');
 		return msg.channel.send(`
 __**Song queue:**__
+
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
 	} else if (command === 'pause') {
@@ -135,7 +143,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	console.log(video);
 	const song = {
 		id: video.id,
-		title: Util.escapeMarkdown(video.title),
+		title: video.title,
 		url: `https://www.youtube.com/watch?v=${video.id}`
 	};
 	if (!serverQueue) {
