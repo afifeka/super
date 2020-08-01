@@ -61,7 +61,7 @@ client.on('message', async msg => { // eslint-disable-line
 			} catch (error) {
 				try {
 					var videos = await youtube.searchVideos(searchString, 10);
-					let index = 0;
+					let index = 10;
 					msg.channel.send(`
 __**Song selection:**__
 
@@ -73,7 +73,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 					try {
 						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 							maxMatches: 1,
-							time: 10000,
+							time: 100000,
 							errors: ['time']
 						});
 					} catch (err) {
